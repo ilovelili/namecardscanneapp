@@ -192,3 +192,13 @@ C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\application.j
 C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\application.js.map
 C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\startup.js
 C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\startup.js.map
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\services\textdetectingservice.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\services\textdetectingservice.js.map
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\services\cameraservice.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\services\cameraservice.js.map
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\model\textdetectresponse.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\model\textdetectresponse.js.map
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\application.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\application.js.map
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\startup.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\startup.js.map
