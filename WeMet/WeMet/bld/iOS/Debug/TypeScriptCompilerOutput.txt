@@ -1,0 +1,4 @@
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\application.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\application.js.map
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\startup.js
+C:\Workspace\Javascript\namecardscannerapp\WeMet\WeMet\www\scripts\startup.js.map
