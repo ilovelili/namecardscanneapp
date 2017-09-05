@@ -15,13 +15,15 @@ define(["require", "exports", "./services/cameraservice"], function (require, ex
         document.addEventListener('click', onClick, false);
     }
     var onTextDetectingSuccess = function (data) {
-        if (data && data.Success) {
-            $('#result').text(data.Text);
+        if (data) {
+            // let datastring = JSON.stringify(data);    
+            $('#result').text(data['Text']);
         }
     };
     var onTextDetectingError = function (err) {
         if (err) {
-            $('#message').text(err);
+            var errmsg = err.responseJSON['Text'];
+            $('#message').text(errmsg.replace('googleapi: ', ''));
         }
     };
     // Taped, launch camera

@@ -6,7 +6,7 @@ define(["require", "exports"], function (require, exports) {
         }
         return TextDetectingService;
     }());
-    TextDetectingService.endpoint = 'http://localhost:3000/text/base64';
+    TextDetectingService.endpoint = 'http://188.166.215.201:3000/text/base64';
     TextDetectingService.DetectText = function (content, suceessCallback, errorCallback) {
         $.ajax({
             url: TextDetectingService.endpoint,

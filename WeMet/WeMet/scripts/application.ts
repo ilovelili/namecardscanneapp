@@ -1,5 +1,5 @@
 ﻿import { CameraService } from './services/cameraservice';
-import { ITextDetectingResponse } from './model/textdetectresponse';
+import { ITextDetectingResponse } from './models/textdetectresponse';
 
 "use strict";
 
@@ -19,14 +19,16 @@ function onDeviceReady(): void {
 
 
 let onTextDetectingSuccess = (data: ITextDetectingResponse) => {
-    if (data && data.Success) {
-        $('#result').text(data.Text);
+    if (data) {
+        // let datastring = JSON.stringify(data);    
+        $('#result').text(data['Text']);
     }
 }
 
 let onTextDetectingError = (err) => {
     if (err) {
-        $('#message').text(err);
+        let errmsg = err.responseJSON['Text'];
+        $('#message').text(errmsg.replace('googleapi: ', ''));
     }
 }
 

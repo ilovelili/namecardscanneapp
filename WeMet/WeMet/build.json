@@ -1,11 +1,11 @@
 {
      "android": {
-         "release": {
-             "keystore": "",
-             "storePassword": "",
-             "alias": "",
-             "password" : "",
-             "keystoreType": ""
-         }
+      "release": {
+        "keystore": "c:\\wemet.keystore",
+        "storePassword": "A7059970599",
+        "alias": "mj",
+        "password": "A7059970599",
+        "keystoreType": ""
+      }
      }
  }

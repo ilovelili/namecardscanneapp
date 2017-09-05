@@ -1,5 +1,5 @@
 ﻿export class TextDetectingService {    
-    private static endpoint: string = 'http://localhost:3000/text/base64';
+    private static endpoint: string = 'http://188.166.215.201:3000/text/base64';
 
     public static DetectText = (content: string, suceessCallback: Function, errorCallback: Function) => {       
 

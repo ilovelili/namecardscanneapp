@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://188.166.215.201:3000 https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -16,10 +16,10 @@
         <h1>WeMet</h1>
         <div id="deviceready" class="blink">
             <p class="event listening">Connecting...</p>
-            <p class="event received">Tap To Start</p>
+            <p class="event received" id="event">Tap To Start</p>
         </div>
 
-        <div id="result"></div>
+        <div id="result"></div>        
         <div id="message"></div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>

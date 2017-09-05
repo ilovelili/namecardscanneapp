@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myappccac3c" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myappccac3c" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1">
   <name>WeMet</name>
   <description>A blank project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS, and the Windows Universal Platform.</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">Min Ju &lt;route666@live.cn&gt;</author>
@@ -9,7 +9,6 @@
   <engine name="ios" spec="4.2.0" />
   <engine name="windows" spec="4.4.2" />
   <content src="index.html" />
-  <access origin="*" />
   <preference name="SplashScreen" value="screen" />
   <preference name="windows-target-version" value="10.0" />
   <!-- Support for Cordova 5.0.0 plugin system -->
@@ -105,4 +104,5 @@
   </platform>
   <plugin name="cordova-plugin-camera" spec="~2.4.1" />
   <plugin name="cordova-plugin-compat" spec="~1.1.0" />
+  <access origin="http://188.166.215.201:3000" />
 </widget>
