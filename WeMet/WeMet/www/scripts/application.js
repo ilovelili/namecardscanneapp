@@ -1,4 +1,4 @@
-define(["require", "exports", "./services/cameraservice"], function (require, exports, cameraservice_1) {
+define(["require", "exports", "./services/cameraservice", "./services/contactservice"], function (require, exports, cameraservice_1, contactservice_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     "use strict";
@@ -15,15 +15,26 @@ define(["require", "exports", "./services/cameraservice"], function (require, ex
         document.addEventListener('click', onClick, false);
     }
     var onTextDetectingSuccess = function (data) {
-        if (data) {
-            // let datastring = JSON.stringify(data);    
-            $('#result').text(data['Text']);
+        var errormsg = [];
+        // no response data.
+        if (!data) {
+            $('#message').text('Oops, namecard not recognized');
+            return;
         }
+        // status is weird
+        if (data.taskStatus !== 'Completed') {
+            $('#message').text('Oops, namecard not recognized');
+            return;
+        }
+        contactservice_1.ContactService.SaveToContact(data, function (contact) {
+            $('#result').text('Contact saved');
+        }, function (err) {
+            $('#message').text('Oops, failed to save contact');
+        });
     };
     var onTextDetectingError = function (err) {
         if (err) {
-            var errmsg = err.responseJSON['Text'];
-            $('#message').text(errmsg.replace('googleapi: ', ''));
+            $('#message').text(err);
         }
     };
     // Taped, launch camera

@@ -1,4 +1,5 @@
 ﻿import { CameraService } from './services/cameraservice';
+import { ContactService } from './services/contactservice';
 import { ITextDetectingResponse } from './models/textdetectresponse';
 
 "use strict";
@@ -17,18 +18,34 @@ function onDeviceReady(): void {
     document.addEventListener('click', onClick, false);
 }
 
-
 let onTextDetectingSuccess = (data: ITextDetectingResponse) => {
-    if (data) {
-        // let datastring = JSON.stringify(data);    
-        $('#result').text(data['Text']);
+    let errormsg = [];
+
+    // no response data.
+    if (!data) {
+        $('#message').text('Oops, namecard not recognized');
+        return;
     }
+
+    // status is weird
+    if (data.taskStatus !== 'Completed') {
+        $('#message').text('Oops, namecard not recognized');
+        return;
+    }
+    
+    ContactService.SaveToContact(data,
+        (contact: Contact) => {
+            $('#result').text('Contact saved');
+        },
+        (err: Error) => {
+            $('#message').text('Oops, failed to save contact');
+        }
+    );    
 }
 
 let onTextDetectingError = (err) => {
     if (err) {
-        let errmsg = err.responseJSON['Text'];
-        $('#message').text(errmsg.replace('googleapi: ', ''));
+        $('#message').text(err);
     }
 }
 

@@ -1,7 +1,10 @@
 ﻿import { TextDetectingService } from './textdetectingservice';
 
+/**
+ * Cordova camera service
+ */
 export class CameraService {
-    private static getPicture = (suceessCallback: Function, errorCallback: Function, options: CameraOptions) => {        
+    private static getPicture = (successCallback: Function, errorCallback: Function, options: CameraOptions) => {        
         navigator.camera.getPicture(
             (imageData) => {
                 if (imageData) {
@@ -11,7 +14,7 @@ export class CameraService {
                         (data) => {
                             if (data) {
                                 $('#event').text('Tap To Start');
-                                suceessCallback(data);
+                                successCallback(data);
                             }
                         },
                         // error
@@ -31,7 +34,7 @@ export class CameraService {
             options);
     }
 
-    public static LaunchCamera = (event: Event, suceessCallback: Function, errorCallback: Function) => {
+    public static LaunchCamera = (event: Event, successCallback: Function, errorCallback: Function) => {
         event.preventDefault();
 
         if (!navigator.camera) {
@@ -48,6 +51,6 @@ export class CameraService {
             encodingType: 0     // 0=JPG 1=PNG. JPG should be smaller in size right
         };
 
-        CameraService.getPicture(suceessCallback, errorCallback, options);
+        CameraService.getPicture(successCallback, errorCallback, options);
     };
 }

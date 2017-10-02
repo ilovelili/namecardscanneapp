@@ -1,12 +1,15 @@
 define(["require", "exports", "./textdetectingservice"], function (require, exports, textdetectingservice_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * Cordova camera service
+     */
     var CameraService = (function () {
         function CameraService() {
         }
         return CameraService;
     }());
-    CameraService.getPicture = function (suceessCallback, errorCallback, options) {
+    CameraService.getPicture = function (successCallback, errorCallback, options) {
         navigator.camera.getPicture(function (imageData) {
             if (imageData) {
                 $('#event').text('proceeding ... ');
@@ -15,7 +18,7 @@ define(["require", "exports", "./textdetectingservice"], function (require, expo
                 function (data) {
                     if (data) {
                         $('#event').text('Tap To Start');
-                        suceessCallback(data);
+                        successCallback(data);
                     }
                 }, 
                 // error
@@ -31,7 +34,7 @@ define(["require", "exports", "./textdetectingservice"], function (require, expo
             errorCallback(err);
         }, options);
     };
-    CameraService.LaunchCamera = function (event, suceessCallback, errorCallback) {
+    CameraService.LaunchCamera = function (event, successCallback, errorCallback) {
         event.preventDefault();
         if (!navigator.camera) {
             // no, no, this can't be
@@ -45,7 +48,7 @@ define(["require", "exports", "./textdetectingservice"], function (require, expo
             sourceType: 1,
             encodingType: 0 // 0=JPG 1=PNG. JPG should be smaller in size right
         };
-        CameraService.getPicture(suceessCallback, errorCallback, options);
+        CameraService.getPicture(successCallback, errorCallback, options);
     };
     exports.CameraService = CameraService;
 });

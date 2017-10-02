@@ -1,7 +1,10 @@
-﻿export class TextDetectingService {    
-    private static endpoint: string = 'http://188.166.215.201:3000/text/base64';
+﻿/**
+ * Text detecting accessor
+ */
+export class TextDetectingService {    
+    private static endpoint: string = 'http://35.185.162.229:8888/Recognize';    
 
-    public static DetectText = (content: string, suceessCallback: Function, errorCallback: Function) => {       
+    public static DetectText = (content: string, successCallback: Function, errorCallback: Function) => {
 
         $.ajax({
             url: TextDetectingService.endpoint,
@@ -9,10 +12,10 @@
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                "data": content,
+                "Data": encodeURIComponent(content),
             }),
             success: (data) => {
-                suceessCallback(data);
+                successCallback(data);
             },
             error: (err) => {
                 errorCallback(err);

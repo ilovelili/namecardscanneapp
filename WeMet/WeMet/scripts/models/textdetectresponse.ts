@@ -1,5 +1,13 @@
-﻿// Text detecting response from server side
+﻿/*
+* Text detecting response from server side
+*/
 export interface ITextDetectingResponse {
-    Success: boolean;
-    Text: string;
+    taskStatus?: string;
+    name?: string;
+    job?: string;
+    company?: string;
+    email?: string;
+    web?: string;
+    phone?: string;
+    text?: string;
 }

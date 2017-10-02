@@ -1,23 +1,26 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * Text detecting accessor
+     */
     var TextDetectingService = (function () {
         function TextDetectingService() {
         }
         return TextDetectingService;
     }());
-    TextDetectingService.endpoint = 'http://188.166.215.201:3000/text/base64';
-    TextDetectingService.DetectText = function (content, suceessCallback, errorCallback) {
+    TextDetectingService.endpoint = 'http://35.185.162.229:8888/Recognize';
+    TextDetectingService.DetectText = function (content, successCallback, errorCallback) {
         $.ajax({
             url: TextDetectingService.endpoint,
             method: 'POST',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                "data": content,
+                "Data": encodeURIComponent(content),
             }),
             success: function (data) {
-                suceessCallback(data);
+                successCallback(data);
             },
             error: function (err) {
                 errorCallback(err);
