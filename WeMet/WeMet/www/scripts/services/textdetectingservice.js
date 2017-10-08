@@ -9,7 +9,7 @@ define(["require", "exports"], function (require, exports) {
         }
         return TextDetectingService;
     }());
-    TextDetectingService.endpoint = 'http://35.185.162.229:8888/Recognize';
+    TextDetectingService.endpoint = 'http://35.185.130.184:8888/Recognize';
     TextDetectingService.DetectText = function (content, successCallback, errorCallback) {
         $.ajax({
             url: TextDetectingService.endpoint,

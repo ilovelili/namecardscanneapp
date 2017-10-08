@@ -18,6 +18,27 @@ function onDeviceReady(): void {
     document.addEventListener('click', onClick, false);
 }
 
+let resolveContactInfoTempl = (contact: Contact) => {
+    let namesegment = `<h4>Name:${contact.displayName }</h4>`,
+        phonesegment = (contact.phoneNumbers && contact.phoneNumbers[0].value) ? `<h4>Phone: ${contact.phoneNumbers[0].value}</h4>` : '',
+        emailsegment = (contact.emails && contact.emails[0].value) ? `<h4>Email: ${contact.emails[0].value}</h4>` : '',
+        organizationsegment = (contact.organizations && contact.organizations[0].name) ? `<h4>Organization: ${contact.organizations[0].name}</h4>` : '',
+        titlesegment = (contact.organizations && contact.organizations[0].title) ? `<h4>Title: ${contact.organizations[0].title}</h4>` : '',
+        addresssegment = (contact.addresses && contact.addresses[0].formatted) ? `<h4>Address: ${contact.addresses[0].formatted}</h4>` : '',
+        websitesegment = (contact.urls && contact.urls[0].value) ? `<h4>Website: ${contact.urls[0].value}</h4>` : '';        
+
+    return `
+        <h3>Contact saved</h3>
+        ${namesegment}
+        ${phonesegment}
+        ${emailsegment}
+        ${organizationsegment}
+        ${titlesegment}
+        ${addresssegment}
+        ${websitesegment}        
+    `;
+};
+
 let onTextDetectingSuccess = (data: ITextDetectingResponse) => {
     let errormsg = [];
 
@@ -35,7 +56,8 @@ let onTextDetectingSuccess = (data: ITextDetectingResponse) => {
     
     ContactService.SaveToContact(data,
         (contact: Contact) => {
-            $('#result').text('Contact saved');
+            $('#result').html(resolveContactInfoTempl(contact));
+
         },
         (err: Error) => {
             $('#message').text('Oops, failed to save contact');

@@ -9,5 +9,7 @@ export interface ITextDetectingResponse {
     email?: string;
     web?: string;
     phone?: string;
+    fax?: string;
+    address?: string;
     text?: string;
 }

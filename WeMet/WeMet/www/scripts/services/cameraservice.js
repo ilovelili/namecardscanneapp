@@ -12,7 +12,7 @@ define(["require", "exports", "./textdetectingservice"], function (require, expo
     CameraService.getPicture = function (successCallback, errorCallback, options) {
         navigator.camera.getPicture(function (imageData) {
             if (imageData) {
-                $('#event').text('proceeding ... ');
+                $('#event').html('<p>proceeding ...<br /> Takes 3 to 30 seconds<p>');
                 textdetectingservice_1.TextDetectingService.DetectText(imageData, 
                 // success
                 function (data) {

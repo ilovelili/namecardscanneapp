@@ -1,11 +1,23 @@
 {
-     "android": {
-      "release": {
-        "keystore": "c:\\wemet.keystore",
-        "storePassword": "A7059970599",
-        "alias": "mj",
-        "password": "A7059970599",
-        "keystoreType": ""
-      }
-     }
- }
+  "android": {
+    "release": {
+      "keystore": "c:\\wemet.keystore",
+      "storePassword": "A7059970599",
+      "alias": "mj",
+      "password": "A7059970599",
+      "keystoreType": ""
+    }
+  },
+  "ios": {
+    "debug": {
+      "developmentTeam": "PB2T2PQ3EC",
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "development"
+    },
+    "release": {
+      "developmentTeam": "PB2T2PQ3EC",
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "app-store"
+    }
+  }
+}

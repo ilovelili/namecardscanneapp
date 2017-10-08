@@ -12,6 +12,7 @@ export class ContactService {
             organizations: ContactService.resolveOrganizations(contact),
             note: ContactService.resolveNote(contact),
             urls: ContactService.resolveUrls(contact),
+            addresses: ContactService.resolveAddresses(contact),
         });
 
         contactObj.save(successCallback, errorCallback);
@@ -30,10 +31,10 @@ export class ContactService {
         return contactFields;
     };
 
-    private static resolveOrganizations = (contact: ITextDetectingResponse): ContactField[] => {
-        let contactFields: ContactField[] = [];
-        contactFields.push(new ContactField('work', contact.company, false));
-        return contactFields;
+    private static resolveOrganizations = (contact: ITextDetectingResponse): ContactOrganization[] => {
+        let contactOrganizations: ContactOrganization[] = [];
+        contactOrganizations.push(new ContactOrganization(false, 'work', contact.company, '', contact.job));
+        return contactOrganizations;
     };
 
     private static resolveNote = (contact: ITextDetectingResponse): string => {
@@ -45,4 +46,10 @@ export class ContactService {
         contactFields.push(new ContactField('work', contact.web, false));
         return contactFields;
     };
+
+    private static resolveAddresses = (contact: ITextDetectingResponse): ContactAddress[] => {
+        let contactAddresses: ContactAddress[] = [];
+        contactAddresses.push(new ContactAddress(false, 'work', contact.address));
+        return contactAddresses;
+    }
 }

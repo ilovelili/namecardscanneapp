@@ -2,7 +2,7 @@
  * Text detecting accessor
  */
 export class TextDetectingService {    
-    private static endpoint: string = 'http://35.185.162.229:8888/Recognize';    
+    private static endpoint: string = 'http://35.185.130.184:8888/Recognize';    
 
     public static DetectText = (content: string, successCallback: Function, errorCallback: Function) => {
 

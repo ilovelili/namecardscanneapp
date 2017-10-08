@@ -8,7 +8,7 @@ export class CameraService {
         navigator.camera.getPicture(
             (imageData) => {
                 if (imageData) {
-                    $('#event').text('proceeding ... ');
+                    $('#event').html('<p>proceeding ...<br /> Takes 3 to 30 seconds<p>');
                     TextDetectingService.DetectText(imageData,
                         // success
                         (data) => {
