@@ -16,7 +16,7 @@ export class ContactService {
         });
 
         contactObj.save(successCallback, errorCallback);
-    }
+    }    
 
     // multiple?
     private static resolvePhoneNumbers = (contact: ITextDetectingResponse): ContactField[] => {

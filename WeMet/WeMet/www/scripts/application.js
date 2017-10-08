@@ -12,11 +12,11 @@ define(["require", "exports", "./services/cameraservice", "./services/contactser
         var receivedElement = parentElement.querySelector('.received');
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-        document.addEventListener('click', onClick, false);
+        document.querySelector('.app').addEventListener('click', onClick, false);
     }
     var resolveContactInfoTempl = function (contact) {
-        var namesegment = "<h4>Name:" + contact.displayName + "</h4>", phonesegment = (contact.phoneNumbers && contact.phoneNumbers[0].value) ? "<h4>Phone: " + contact.phoneNumbers[0].value + "</h4>" : '', emailsegment = (contact.emails && contact.emails[0].value) ? "<h4>Email: " + contact.emails[0].value + "</h4>" : '', organizationsegment = (contact.organizations && contact.organizations[0].name) ? "<h4>Organization: " + contact.organizations[0].name + "</h4>" : '', titlesegment = (contact.organizations && contact.organizations[0].title) ? "<h4>Title: " + contact.organizations[0].title + "</h4>" : '', addresssegment = (contact.addresses && contact.addresses[0].formatted) ? "<h4>Address: " + contact.addresses[0].formatted + "</h4>" : '', websitesegment = (contact.urls && contact.urls[0].value) ? "<h4>Website: " + contact.urls[0].value + "</h4>" : '';
-        return "\n        <h3>Contact saved</h3>\n        " + namesegment + "\n        " + phonesegment + "\n        " + emailsegment + "\n        " + organizationsegment + "\n        " + titlesegment + "\n        " + addresssegment + "\n        " + websitesegment + "        \n    ";
+        var namesegment = "<label for=\"name\">Name:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"name\" id=\"contactname\" value=\"" + contact.name + "\" />", phonesegment = contact.phone ? "<label for=\"phone\">Phone:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"phone\" id=\"contactphone\" value=\"" + contact.phone + "\" />" : '', emailsegment = contact.email ? "<label for=\"phone\">Mail:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"mail\" id=\"contactmail\" value=\"" + contact.email + "\" />" : '', organizationsegment = contact.company ? "<label for=\"organization\">Organization:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"contactorganization\" id=\"organization\" value=\"" + contact.company + "\" />" : '', titlesegment = contact.job ? "<label for=\"title\">Title:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"title\" id=\"contacttitle\" value=\"" + contact.job + "\" />" : '', addresssegment = contact.address ? "<label for=\"address\">Address:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"address\" id=\"contactaddress\" value=\"" + contact.address + "\" />" : '', websitesegment = contact.web ? "<label for=\"address\">Website:</label><input type=\"text\" class=\"ui-corner-all ui-mini ui-input-text ui-shadow-inset\" name=\"website\" id=\"contactwebsite\" value=\"" + contact.web + "\"/>" : '';
+        return "        \n        <form>            \n            " + namesegment + "\n            " + phonesegment + "\n            " + emailsegment + "\n            " + organizationsegment + "\n            " + titlesegment + "\n            " + addresssegment + "\n            " + websitesegment + "\n            <input type=\"submit\" class=\"ui-btn ui-corner-all ui-btn-inline\" id=\"saveContact\" value=\"Save Contact\" />\n        </form>\n    ";
     };
     var onTextDetectingSuccess = function (data) {
         var errormsg = [];
@@ -30,15 +30,30 @@ define(["require", "exports", "./services/cameraservice", "./services/contactser
             $('#message').text('Oops, namecard not recognized');
             return;
         }
-        contactservice_1.ContactService.SaveToContact(data, function (contact) {
-            $('#result').html(resolveContactInfoTempl(contact));
+        $('#result').html(resolveContactInfoTempl(data));
+        document.querySelector('#saveContact').addEventListener('touchend', saveContact, false);
+    };
+    var saveContact = function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+        var contact = {
+            name: $('#contactname').val(),
+            phone: $('#contactphone') ? $('#contactphone').val() : null,
+            company: $('#contactcompany') ? $('#contactcompany').val() : null,
+            job: $('#contacttitle') ? $('#contacttitle').val() : null,
+            email: $('#contactemail') ? $('#contactemail').val() : null,
+            web: $('#contactweb') ? $('#contactweb').val() : null,
+            address: $('#contactaddress') ? $('#contactaddress').val() : null,
+        };
+        contactservice_1.ContactService.SaveToContact(contact, function (contact) {
+            $('#result').html('<h4>Contact Saved</h4>');
         }, function (err) {
             $('#message').text('Oops, failed to save contact');
         });
     };
     var onTextDetectingError = function (err) {
         if (err) {
-            $('#message').text(err);
+            $('#message').text('Oops, something wrong. Please retry');
         }
     };
     // Taped, launch camera

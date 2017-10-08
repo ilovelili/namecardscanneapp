@@ -8,7 +8,10 @@ export class CameraService {
         navigator.camera.getPicture(
             (imageData) => {
                 if (imageData) {
-                    $('#event').html('<p>proceeding ...<br /> Takes 3 to 30 seconds<p>');
+                    $('#result').text();
+                    $('#message').text();
+                    $('#event').html('proceeding ...');
+
                     TextDetectingService.DetectText(imageData,
                         // success
                         (data) => {
@@ -31,7 +34,8 @@ export class CameraService {
                 $('#event').text('Tap To Start');
                 errorCallback(err);
             },
-            options);
+            options
+        );
     }
 
     public static LaunchCamera = (event: Event, successCallback: Function, errorCallback: Function) => {

@@ -15,27 +15,35 @@ function onDeviceReady(): void {
     listeningElement.setAttribute('style', 'display:none;');
     receivedElement.setAttribute('style', 'display:block;');
 
-    document.addEventListener('click', onClick, false);
+    document.querySelector('.app').addEventListener('click', onClick, false);
 }
 
-let resolveContactInfoTempl = (contact: Contact) => {
-    let namesegment = `<h4>Name:${contact.displayName }</h4>`,
-        phonesegment = (contact.phoneNumbers && contact.phoneNumbers[0].value) ? `<h4>Phone: ${contact.phoneNumbers[0].value}</h4>` : '',
-        emailsegment = (contact.emails && contact.emails[0].value) ? `<h4>Email: ${contact.emails[0].value}</h4>` : '',
-        organizationsegment = (contact.organizations && contact.organizations[0].name) ? `<h4>Organization: ${contact.organizations[0].name}</h4>` : '',
-        titlesegment = (contact.organizations && contact.organizations[0].title) ? `<h4>Title: ${contact.organizations[0].title}</h4>` : '',
-        addresssegment = (contact.addresses && contact.addresses[0].formatted) ? `<h4>Address: ${contact.addresses[0].formatted}</h4>` : '',
-        websitesegment = (contact.urls && contact.urls[0].value) ? `<h4>Website: ${contact.urls[0].value}</h4>` : '';        
+let resolveContactInfoTempl = (contact: ITextDetectingResponse) => {
+    let namesegment = `<label for="name">Name:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="name" id="contactname" value="${contact.name}" />`,
 
-    return `
-        <h3>Contact saved</h3>
-        ${namesegment}
-        ${phonesegment}
-        ${emailsegment}
-        ${organizationsegment}
-        ${titlesegment}
-        ${addresssegment}
-        ${websitesegment}        
+        phonesegment = contact.phone ? `<label for="phone">Phone:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="phone" id="contactphone" value="${contact.phone}" />` : '',
+
+        emailsegment = contact.email ? `<label for="phone">Mail:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="mail" id="contactmail" value="${contact.email}" />` : '',
+
+        organizationsegment = contact.company ? `<label for="organization">Organization:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="contactorganization" id="organization" value="${contact.company}" />` : '',
+
+        titlesegment = contact.job ? `<label for="title">Title:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="title" id="contacttitle" value="${contact.job}" />` : '',
+
+        addresssegment = contact.address ? `<label for="address">Address:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="address" id="contactaddress" value="${contact.address}" />` : '',
+
+        websitesegment = contact.web ? `<label for="address">Website:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="website" id="contactwebsite" value="${contact.web}"/>` : '';    
+
+    return `        
+        <form>            
+            ${namesegment}
+            ${phonesegment}
+            ${emailsegment}
+            ${organizationsegment}
+            ${titlesegment}
+            ${addresssegment}
+            ${websitesegment}
+            <input type="submit" class="ui-btn ui-corner-all ui-btn-inline" id="saveContact" value="Save Contact" />
+        </form>
     `;
 };
 
@@ -53,21 +61,38 @@ let onTextDetectingSuccess = (data: ITextDetectingResponse) => {
         $('#message').text('Oops, namecard not recognized');
         return;
     }
-    
-    ContactService.SaveToContact(data,
-        (contact: Contact) => {
-            $('#result').html(resolveContactInfoTempl(contact));
 
+    $('#result').html(resolveContactInfoTempl(data));
+    document.querySelector('#saveContact').addEventListener('touchend', saveContact, false);
+}
+
+let saveContact = (event: Event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    let contact: ITextDetectingResponse = {
+        name: <string>$('#contactname').val(),
+        phone: $('#contactphone') ? <string>$('#contactphone').val() : null,
+        company: $('#contactcompany') ? <string>$('#contactcompany').val() : null,
+        job: $('#contacttitle') ? <string>$('#contacttitle').val() : null,
+        email: $('#contactemail') ? <string>$('#contactemail').val() : null,
+        web: $('#contactweb') ? <string>$('#contactweb').val() : null,
+        address: $('#contactaddress') ? <string>$('#contactaddress').val() : null,
+    }
+
+    ContactService.SaveToContact(contact,
+        (contact: Contact) => {            
+            $('#result').html('<h4>Contact Saved</h4>');            
         },
         (err: Error) => {
             $('#message').text('Oops, failed to save contact');
         }
-    );    
+    );
 }
 
 let onTextDetectingError = (err) => {
     if (err) {
-        $('#message').text(err);
+        $('#message').text('Oops, something wrong. Please retry');
     }
 }
 
