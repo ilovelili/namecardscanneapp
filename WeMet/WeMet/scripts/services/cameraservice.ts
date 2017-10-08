@@ -10,6 +10,10 @@ export class CameraService {
                 if (imageData) {
                     $('#result').text();
                     $('#message').text();
+
+                    // delete me
+                    window.alert('you clicked. (testing)');
+
                     $('#event').html('proceeding ...');
 
                     TextDetectingService.DetectText(imageData,

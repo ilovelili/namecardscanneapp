@@ -2,8 +2,10 @@
  * Text detecting accessor
  */
 export class TextDetectingService {    
-    private static endpoint: string = 'http://35.185.130.184:8888/Recognize';    
-
+    // Prod
+    // private static endpoint: string = 'http://35.185.130.184:8888/Recognize';    
+    
+    private static endpoint: string = 'http://35.185.130.184:8888/RecognizeMock';
     public static DetectText = (content: string, successCallback: Function, errorCallback: Function) => {
 
         $.ajax({

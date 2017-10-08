@@ -9,7 +9,9 @@ define(["require", "exports"], function (require, exports) {
         }
         return TextDetectingService;
     }());
-    TextDetectingService.endpoint = 'http://35.185.130.184:8888/Recognize';
+    // Prod
+    // private static endpoint: string = 'http://35.185.130.184:8888/Recognize';    
+    TextDetectingService.endpoint = 'http://35.185.130.184:8888/RecognizeMock';
     TextDetectingService.DetectText = function (content, successCallback, errorCallback) {
         $.ajax({
             url: TextDetectingService.endpoint,

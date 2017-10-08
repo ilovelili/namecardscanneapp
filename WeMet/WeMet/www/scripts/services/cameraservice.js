@@ -14,6 +14,8 @@ define(["require", "exports", "./textdetectingservice"], function (require, expo
             if (imageData) {
                 $('#result').text();
                 $('#message').text();
+                // delete me
+                window.alert('you clicked. (testing)');
                 $('#event').html('proceeding ...');
                 textdetectingservice_1.TextDetectingService.DetectText(imageData, 
                 // success

@@ -19,30 +19,59 @@ function onDeviceReady(): void {
 }
 
 let resolveContactInfoTempl = (contact: ITextDetectingResponse) => {
-    let namesegment = `<label for="name">Name:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="name" id="contactname" value="${contact.name}" />`,
+    let namesegment = `
+        <div class="form-group">
+            <label for="name">Name:</label><input type="text" class="form-control" name="name" id="contactname" value="${contact.name}" />
+        </div>`,
 
-        phonesegment = contact.phone ? `<label for="phone">Phone:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="phone" id="contactphone" value="${contact.phone}" />` : '',
+        phonesegment = contact.phone ? `
+        <div class="form-group">
+            <label for="phone">Phone:</label><input type="text" class="form-control" name="phone" id="contactphone" value="${contact.phone}" />
+        </div>
+        ` : '',
 
-        emailsegment = contact.email ? `<label for="phone">Mail:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="mail" id="contactmail" value="${contact.email}" />` : '',
+        emailsegment = contact.email ? `
+        <div class="form-group">
+            <label for="phone">Mail:</label><input type="text" class="form-control" name="mail" id="contactmail" value="${contact.email}" />
+        </div>
+        ` : '',
 
-        organizationsegment = contact.company ? `<label for="organization">Organization:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="contactorganization" id="organization" value="${contact.company}" />` : '',
+        organizationsegment = contact.company ? `
+        <div class="form-group">
+            <label for="organization">Company:</label><input type="text" class="form-control" name="contactorganization" id="organization" value="${contact.company}" />
+        </div>
+        ` : '',
 
-        titlesegment = contact.job ? `<label for="title">Title:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="title" id="contacttitle" value="${contact.job}" />` : '',
+        titlesegment = contact.job ? `
+        <div class="form-group">
+            <label for="title">Title:</label><input type="text" class="form-control" name="title" id="contacttitle" value="${contact.job}" />
+        </div>
+        ` : '',
 
-        addresssegment = contact.address ? `<label for="address">Address:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="address" id="contactaddress" value="${contact.address}" />` : '',
+        addresssegment = contact.address ? `
+        <div class="form-group">
+            <label for="address">Address:</label><input type="text" class="form-control" name="address" id="contactaddress" value="${contact.address}" />
+        </div>
+        ` : '',
 
-        websitesegment = contact.web ? `<label for="address">Website:</label><input type="text" class="ui-corner-all ui-mini ui-input-text ui-shadow-inset" name="website" id="contactwebsite" value="${contact.web}"/>` : '';    
+        websitesegment = contact.web ? `
+        <div class="form-group">
+            <label for="address">Website:</label><input type="text" class="form-control" name="website" id="contactwebsite" value="${contact.web}"/>
+        </div>
+        ` : '';    
 
     return `        
-        <form>            
-            ${namesegment}
-            ${phonesegment}
-            ${emailsegment}
-            ${organizationsegment}
-            ${titlesegment}
-            ${addresssegment}
-            ${websitesegment}
-            <input type="submit" class="ui-btn ui-corner-all ui-btn-inline" id="saveContact" value="Save Contact" />
+        <form class="form-horizontal">
+            <fieldset>                
+                ${namesegment}
+                ${phonesegment}
+                ${emailsegment}
+                ${organizationsegment}
+                ${titlesegment}
+                ${addresssegment}
+                ${websitesegment}
+                <input type="submit" class="btn btn-primary" id="saveContact" value="Save Contact" />
+            </fieldset>
         </form>
     `;
 };
