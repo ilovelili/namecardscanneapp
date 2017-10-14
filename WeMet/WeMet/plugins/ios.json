@@ -7,22 +7,22 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-contacts": {
+            "CONTACTS_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "tokyo.katie.wemet"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "tokyo.katie.wemet"
+        },
         "cordova-plugin-camera": {
             "CAMERA_USAGE_DESCRIPTION": " ",
             "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "io.cordova.myappccac3c"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.myappccac3c"
-        },
-        "cordova-plugin-contacts": {
-            "CONTACTS_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "io.cordova.myappccac3c"
+            "PACKAGE_NAME": "tokyo.katie.wemet"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.cordova.myappccac3c"
+            "PACKAGE_NAME": "tokyo.katie.wemet"
         }
     }
 }

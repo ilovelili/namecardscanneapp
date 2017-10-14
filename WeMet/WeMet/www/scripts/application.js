@@ -4,6 +4,7 @@ define(["require", "exports", "./services/cameraservice", "./services/contactser
     "use strict";
     function initialize() {
         document.addEventListener('deviceready', onDeviceReady, false);
+        document.querySelector('.app').addEventListener('click', onClick, false);
     }
     exports.initialize = initialize;
     function onDeviceReady() {
@@ -12,7 +13,6 @@ define(["require", "exports", "./services/cameraservice", "./services/contactser
         var receivedElement = parentElement.querySelector('.received');
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-        document.querySelector('.app').addEventListener('click', onClick, false);
     }
     var resolveContactInfoTempl = function (contact) {
         var namesegment = "\n        <div class=\"form-group\">\n            <label for=\"name\">Name:</label><input type=\"text\" class=\"form-control\" name=\"name\" id=\"contactname\" value=\"" + contact.name + "\" />\n        </div>", phonesegment = contact.phone ? "\n        <div class=\"form-group\">\n            <label for=\"phone\">Phone:</label><input type=\"text\" class=\"form-control\" name=\"phone\" id=\"contactphone\" value=\"" + contact.phone + "\" />\n        </div>\n        " : '', emailsegment = contact.email ? "\n        <div class=\"form-group\">\n            <label for=\"phone\">Mail:</label><input type=\"text\" class=\"form-control\" name=\"mail\" id=\"contactmail\" value=\"" + contact.email + "\" />\n        </div>\n        " : '', organizationsegment = contact.company ? "\n        <div class=\"form-group\">\n            <label for=\"organization\">Company:</label><input type=\"text\" class=\"form-control\" name=\"contactorganization\" id=\"organization\" value=\"" + contact.company + "\" />\n        </div>\n        " : '', titlesegment = contact.job ? "\n        <div class=\"form-group\">\n            <label for=\"title\">Title:</label><input type=\"text\" class=\"form-control\" name=\"title\" id=\"contacttitle\" value=\"" + contact.job + "\" />\n        </div>\n        " : '', addresssegment = contact.address ? "\n        <div class=\"form-group\">\n            <label for=\"address\">Address:</label><input type=\"text\" class=\"form-control\" name=\"address\" id=\"contactaddress\" value=\"" + contact.address + "\" />\n        </div>\n        " : '', websitesegment = contact.web ? "\n        <div class=\"form-group\">\n            <label for=\"address\">Website:</label><input type=\"text\" class=\"form-control\" name=\"website\" id=\"contactwebsite\" value=\"" + contact.web + "\"/>\n        </div>\n        " : '';
@@ -31,7 +31,8 @@ define(["require", "exports", "./services/cameraservice", "./services/contactser
             return;
         }
         $('#result').html(resolveContactInfoTempl(data));
-        document.querySelector('#saveContact').addEventListener('touchend', saveContact, false);
+        var clickhandler = ('ontouchend' in document.documentElement ? "touchend" : "click");
+        document.querySelector('#saveContact').addEventListener(clickhandler, saveContact, false);
     };
     var saveContact = function (event) {
         event.stopPropagation();
@@ -53,12 +54,11 @@ define(["require", "exports", "./services/cameraservice", "./services/contactser
     };
     var onTextDetectingError = function (err) {
         if (err) {
-            $('#message').text('Oops, something wrong. Please retry');
+            // $('#message').text('Oops, something wrong. Please retry');
         }
     };
-    // Taped, launch camera
-    function onClick(event) {
+    var onClick = function (event) {
         cameraservice_1.CameraService.LaunchCamera(event, onTextDetectingSuccess, onTextDetectingError);
-    }
+    };
 });
 //# sourceMappingURL=application.js.map

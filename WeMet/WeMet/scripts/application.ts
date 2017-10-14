@@ -6,6 +6,7 @@ import { ITextDetectingResponse } from './models/textdetectresponse';
 
 export function initialize(): void {
     document.addEventListener('deviceready', onDeviceReady, false);
+    document.querySelector('.app').addEventListener('click', onClick, false);    
 }
 
 function onDeviceReady(): void {
@@ -14,8 +15,6 @@ function onDeviceReady(): void {
     const receivedElement = parentElement.querySelector('.received');
     listeningElement.setAttribute('style', 'display:none;');
     receivedElement.setAttribute('style', 'display:block;');
-
-    document.querySelector('.app').addEventListener('click', onClick, false);
 }
 
 let resolveContactInfoTempl = (contact: ITextDetectingResponse) => {
@@ -92,7 +91,8 @@ let onTextDetectingSuccess = (data: ITextDetectingResponse) => {
     }
 
     $('#result').html(resolveContactInfoTempl(data));
-    document.querySelector('#saveContact').addEventListener('touchend', saveContact, false);
+    const clickhandler = ('ontouchend' in document.documentElement ? "touchend" : "click");
+    document.querySelector('#saveContact').addEventListener(clickhandler, saveContact, false);
 }
 
 let saveContact = (event: Event) => {
@@ -121,11 +121,10 @@ let saveContact = (event: Event) => {
 
 let onTextDetectingError = (err) => {
     if (err) {
-        $('#message').text('Oops, something wrong. Please retry');
+        // $('#message').text('Oops, something wrong. Please retry');
     }
 }
 
-// Taped, launch camera
-function onClick(event: Event): void {
+let onClick = (event: Event) => {
     CameraService.LaunchCamera(event, onTextDetectingSuccess, onTextDetectingError);
 }

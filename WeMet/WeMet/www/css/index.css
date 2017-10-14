@@ -97,4 +97,5 @@ h1 {
 
 #deviceready {
     text-transform:uppercase;
+    cursor: pointer;
 }
